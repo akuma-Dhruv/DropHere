@@ -15,12 +15,13 @@ exports.s3Uploadv2 = async (file) => {
 };
 
 
-exports.s3Listobjects= async()=>{
+exports.s3Listobjects= async(token)=>{
   
-  let r = await s3.listObjectsV2({ Bucket: process.env.AWS_BUCKET_NAME,Prefix:"uploads/",Delimiter:"/" }).promise();
-  let x = r.Contents.map(item => item.Key);
-  console.log(x);
-  //return await r.promise();
+  let r = await s3.listObjectsV2({ Bucket: process.env.AWS_BUCKET_NAME,Prefix:token }).promise();
+  // let x = r.Contents.map(item => item.Key);
+  // console.log(x);
+  
+  return r;
   
 }
 const file="uploads/Screenshot (24).png"
