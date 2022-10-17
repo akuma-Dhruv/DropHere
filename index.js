@@ -39,12 +39,11 @@ const upload = multer({
 app.post("/upload", upload.single("file"), async (req, res) => {
   const token =Math.floor(Math.random()*900000)+100000;
   const result = s3Uploadv2(req.file,token);
-  res.json({ status: "success", result });
+  res.json({ status: "success", result,Token:token });
   setTimeout(() => {
-    
-    
     console.log(result);
   }, 300);
+  console.log(token);
 });
 
 app.get("/test",function(req,res){

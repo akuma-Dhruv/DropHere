@@ -3,11 +3,11 @@ const { S3 } = require("aws-sdk");
 // const uuid = require("uuid").v4;
 
 const s3 = new S3();
-exports.s3Uploadv2 = async (file) => {
+exports.s3Uploadv2 = async (file,token) => {
   
   const param = {
     Bucket: process.env.AWS_BUCKET_NAME,
-    Key: `uploads/${file.originalname}`,
+    Key: `${token}/${file.originalname}`,
     Body: file.buffer,
   };
   
