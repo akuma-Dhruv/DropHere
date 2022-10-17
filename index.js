@@ -37,16 +37,27 @@ const upload = multer({
 // const upload = multer({ "/uploads" });
 
 app.post("/upload", upload.single("file"), async (req, res) => {
-  const result = s3Uploadv2(req.file);
+  const token =Math.floor(Math.random()*900000)+100000;
+  const result = s3Uploadv2(req.file,token);
   res.json({ status: "success", result });
   setTimeout(() => {
-
-    //console.log(req.file);
+    
+    
     console.log(result);
   }, 300);
 });
 
+app.get("/test",function(req,res){
+  for(let i=0;i<100;i++)
+  {
 
+    let token =Math.floor(Math.random()*900000)+100000;
+    
+    console.log(token);
+   // res.send(" "+token);
+  }
+
+})
 app.get("/list", async (req, res) => {
 
   
@@ -54,7 +65,7 @@ app.get("/list", async (req, res) => {
 
   let r=await s3Listobjects(token);
 
-  console.log(r);
+  // console.log(r);
   let x = r.Contents.map(item => item.Key);
   res.send(x)
 });
