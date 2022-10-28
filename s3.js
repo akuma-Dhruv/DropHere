@@ -1,37 +1,36 @@
 const { S3 } = require("aws-sdk");
 // const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
-// const uuid = require("uuid").v4;
 
 const s3 = new S3();
-exports.s3Uploadv2 = async (file,token) => {
-  
-  const param = {
-    Bucket: process.env.AWS_BUCKET_NAME,
-    Key: `${token}/${file.originalname}`,
-    Body: file.buffer,
-  };
-  
-  return await s3.upload(param).promise();
-};
+exports.s3Uploadv2 = async (files, token) => {
 
+  const params = files.map((file) => {
+    return {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: `${token}/${file.originalname}`,
+      Body: file.buffer,
+    };
+  });
+  return await Promise.all(params.map((param) => s3.upload(param).promise()));
+}
 
-exports.s3Listobjects= async(token)=>{
-  
-  let r = await s3.listObjectsV2({ Bucket: process.env.AWS_BUCKET_NAME,Prefix:token }).promise();
+exports.s3Listobjects = async (token) => {
+
+  let r = await s3.listObjectsV2({ Bucket: process.env.AWS_BUCKET_NAME, Prefix: token,Delimiter:token }).promise();
   // let x = r.Contents.map(item => item.Key);
   // console.log(x);
-  
+
   return r;
-  
+
 }
-const file="uploads/Screenshot (24).png"
-exports.s3DeleteObjects= async()=>{
-  await s3.deleteObject({Bucket: process.env.AWS_BUCKET_NAME,Key:file}).promise();
+const file = "uploads/Screenshot (24).png"
+exports.s3DeleteObjects = async () => {
+  await s3.deleteObject({ Bucket: process.env.AWS_BUCKET_NAME, Key: file }).promise();
   console.log("deleted");
 }
 
-exports.s3DownloadObjects= async(file)=>{
-  let r=await s3.getObject ({Bucket: process.env.AWS_BUCKET_NAME,Key:file}).promise();
+exports.s3DownloadObjects = async (file) => {
+  let r = await s3.getObject({ Bucket: process.env.AWS_BUCKET_NAME, Key: file }).promise();
   return r;
 }
 

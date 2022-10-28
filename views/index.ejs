@@ -1,0 +1,12 @@
+<%- include('partials/header'); -%>
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" id="image">
+    <button type="submit">Upload</button>
+</form>
+<form action="/list" method="get">
+    <input type="number" name="token" id="token">
+    <button type ="submit">List</button>
+</form>
+
+<%- include('partials/footer'); -%>

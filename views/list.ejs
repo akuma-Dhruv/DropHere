@@ -1,0 +1,11 @@
+<%- include('partials/header'); -%>
+<div id="list">
+    <% if (x && x.length) { %>
+        <ul>
+          <% x.forEach((item) => { %>
+            <li><%= item %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+</div>
+<%- include('partials/footer'); -%>

@@ -3,6 +3,12 @@ const express = require("express");
 const multer = require("multer");
 const { s3Uploadv2, s3Listobjects, s3DeleteObjects, s3DownloadObjects } = require("./s3");
 const app = express();
+app.set('view engine','ejs');
+
+//******* delete ot after use */
+
+var listResponse='';
+
 
 
 // multiple file uploads
@@ -31,18 +37,15 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
   storage,
-  fileFilter,
-  limits: { fileSize: 10000000000, files: 2 }
+  limits: { fileSize: 10000000000, files: 5 }
 });
 // const upload = multer({ "/uploads" });
 
-app.post("/upload", upload.single("file"), async (req, res) => {
+app.post("/upload", upload.array("file"), async (req, res) => {
   const token =Math.floor(Math.random()*900000)+100000;
-  const result = s3Uploadv2(req.file,token);
+  const result = await s3Uploadv2(req.files,token);
   res.json({ status: "success", result,Token:token });
-  setTimeout(() => {
-    console.log(result);
-  }, 300);
+ 
   console.log(token);
 });
 
@@ -63,22 +66,26 @@ app.get("/list", async (req, res) => {
   let token=req.query.token;
 
   let r=await s3Listobjects(token);
-
+  listResponse=r;
   // console.log(r);
   let x = r.Contents.map(item => item.Key);
-  res.send(x)
+  console.log(typeof(x));
+  console.log(x);
+  res.render("list",{x});
 });
 app.get("/delete", async (req, res) => {
 
   s3DeleteObjects();
 });
-app.get("/download/uploads/:file", async (req, res) => {
-  const file = req.params.file
-
-  console.log(
-    file
-  );
-  let r = s3DownloadObjects("uploads/" + file);
+app.get("/download", async (req, res) => {
+  //console.log(listResponse );
+  let x = listResponse.Contents.map(item => item.Key);
+  var files={};
+  for( let i in x){
+    console.log( x[i]);
+   let r = s3DownloadObjects(x[i]);
+    files[i]=(path=x[i],name)
+  }
   res.send((await r).Body);
 });
 
@@ -87,6 +94,7 @@ app.get("/download/uploads/:file", async (req, res) => {
 // })
 app.get('/', function (req, res) {
 
-  res.sendFile(__dirname + "/index.html")
+  // res.sendFile(__dirname + "/index.html")
+  res.render("index");
 })
 app.listen(8080, () => console.log("listening to local host"));
