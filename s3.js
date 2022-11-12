@@ -24,9 +24,12 @@ exports.s3Listobjects = async (token) => {
 
 }
 const file = "uploads/Screenshot (24).png"
-exports.s3DeleteObjects = async () => {
-  await s3.deleteObject({ Bucket: process.env.AWS_BUCKET_NAME, Key: file }).promise();
-  console.log("deleted");
+exports.s3DeleteObjects = async (token) => {
+  let keys= this.s3Listobjects(token);
+  const objects = (await keys).Contents.map(Key => Key.Key);
+  console.log(objects)
+  let r=await s3.deleteObjects({ Bucket: process.env.AWS_BUCKET_NAME, Delete: objects }).promise();
+  console.log(r);
 }
 
 exports.s3DownloadObjects = async (file) => {

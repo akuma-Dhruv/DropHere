@@ -3,7 +3,10 @@
     <% if (x && x.length) { %>
         <ul>
           <% x.forEach((item) => { %>
-            <li><%= item %></li>
+            <a href="download/<%=item%>" >
+              
+              <li><%= item %></li>
+            </a>
           <% }) %>
         </ul>
       <% } %>
