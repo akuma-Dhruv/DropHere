@@ -4,6 +4,7 @@ const multer = require("multer");
 const { s3Uploadv2, s3Listobjects, s3DeleteObjects, s3DownloadObjects } = require("./s3");
 const app = express();
 app.set('view engine', 'ejs');
+app.use("/public", express.static('public')); 
 
 //******* delete ot after use */
 

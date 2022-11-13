@@ -23,7 +23,6 @@ exports.s3Listobjects = async (token) => {
   return r;
 
 }
-const file = "uploads/Screenshot (24).png"
 exports.s3DeleteObjects = async (token) => {
   let keys= this.s3Listobjects(token);
   const objects = (await keys).Contents.map(Key => Key.Key);
