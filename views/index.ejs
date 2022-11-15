@@ -1,16 +1,36 @@
 <%- include('partials/header'); -%>
 
 
+    <div id="cta">
+        <div id="sendBox">
+            <div id="sendText">
+                <p>Send</p>
+            </div>
+            <p id="fileList">
+
+            </p>
+            <div>
+                <img src="/public/img/add.png" id="addButton" alt="add files">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="selectFiles" multiple>
+                    <button type="submit" >Upload</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="recieveBox">
+            <div id="recieveText">
+                <p>
+                    Recieve
+                </p>
+            </div>
 
 
+            <form action="/list" method="get">
+                <input type="number" name="token" id="token">
+                <button type="submit">List</button>
+            </form>
+        </div>
+    </div>
 
-<!-- <form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" id="image">
-    <button type="submit">Upload</button>
-</form>
-<form action="/list" method="get">
-    <input type="number" name="token" id="token">
-    <button type ="submit">List</button>
-</form> -->
-
-<%- include('partials/footer'); -%>
+    <%- include('partials/footer'); -%>
