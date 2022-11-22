@@ -50,16 +50,7 @@ app.post("/upload", upload.array("file"), async (req, res) => {
   console.log(token);
 });
 
-app.get("/test", function (req, res) {
-  for (let i = 0; i < 100; i++) {
 
-    let token = Math.floor(Math.random() * 900000) + 100000;
-
-    console.log(token);
-    // res.send(" "+token);
-  }
-
-})
 app.get("/list", async (req, res) => {
 
 
