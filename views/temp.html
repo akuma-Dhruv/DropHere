@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo">SEND</div>
+      <div class="nav-items">
+        <a href="/">Home</a> <a href="/">About</a> <a href="/">Contact</a>
+      </div>
+    </nav>
+
+    ///
+    <section class="hero">
+      <div class="hero-container" id="cta">
+        <div class="column-left" id="sendbox">
+          <h1>Send wherever you want !</h1>
+          <div>
+            <img src="/public/img/add.png" id="addButton" alt="add files" />
+            <form action="/upload" method="post" enctype="multipart/form-data">
+              <input type="file" name="file" id="selectFiles" multiple hidden />
+              <button type="submit" id="uploadButton">Upload</button>
+            </form>
+          </div>
+        </div>
+        <!-- <button>Get Started</button> -->
+        <div id="recieveBox">
+          <div id="recieveText">
+            <p>Recieve</p>
+          </div>
+
+          <form action="/list" method="get">
+            <input type="number" name="token" id="token" />
+            <button type="submit" id="listButton">List</button>
+          </form>
+        </div>
+        <div class="column-right">
+          <img
+            src="./image-1.svg"
+            alt="illustration
+        "
+            class="hero-image"
+          />
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
