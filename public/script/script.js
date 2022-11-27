@@ -12,6 +12,14 @@ selectFiles.addEventListener("change",function(e){
     {
         addbutton.setAttribute("hidden","hidden")
     }
+    if(fileList.lastElementChild)
+    {
+        var child = fileList.lastElementChild; 
+        while (child) {
+            fileList.removeChild(child);
+            child = fileList.lastElementChild;
+        }
+    }
     var selectedFiles=e.target.files;
     for(let i=0;i<selectedFiles.length;i++)
     {

@@ -45,8 +45,8 @@ const upload = multer({
 app.post("/upload", upload.array("file"), async (req, res) => {
   const token = Math.floor(Math.random() * 900000) + 100000;
   const result = await s3Uploadv2(req.files, token);
-  res.json({ status: "success", result, Token: token });
-
+  // res.json({ status: "success", result, Token: token });
+  res.render("upload",{token});
   console.log(token);
 });
 
