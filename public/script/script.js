@@ -1,16 +1,16 @@
-const sendArea=document.getElementById("sendBox")
+const chooseFile=document.getElementById("chooseFiles")
 const selectFiles=document.getElementById("selectFiles")
-const addbutton= document.getElementById("addButton")
 const fileList= document.getElementById("fileList");
 
-sendArea.addEventListener("click",function(){
+chooseFile.addEventListener("click",function(){
     selectFiles.click();
 });
 
 selectFiles.addEventListener("change",function(e){
     if(selectFiles.value)
     {
-        addbutton.setAttribute("hidden","hidden")
+        chooseFile.setAttribute("hidden","hidden")
+        document.getElementById("uploadButton").removeAttribute("hidden");
     }
     if(fileList.lastElementChild)
     {
