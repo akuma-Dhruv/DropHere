@@ -78,10 +78,13 @@ app.get("/download/:ft/:fn", async (req, res) => {
 
   res.send((await r).Body);
 });
+//removee after use
 
-// app.get('/upload',function(req,res){
 
-// })
+ app.get('/upload',function(req,res){
+  let token=0;
+  res.render("upload",{token})
+ })
 app.get('/', function (req, res) {
 
   // res.sendFile(__dirname + "/index.html")
