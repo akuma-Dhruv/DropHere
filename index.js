@@ -3,6 +3,7 @@ const express = require("express");
 const multer = require("multer");
 const { s3Uploadv2, s3Listobjects, s3DeleteObjects, s3DownloadObjects } = require("./s3");
 const app = express();
+const port=process.env.PORT|| 8080;
 app.set('view engine', 'ejs');
 app.use("/public", express.static('public')); 
 
@@ -92,4 +93,4 @@ app.get('/', function (req, res) {
   // res.sendFile(__dirname + "/index.html")
   res.render("index");
 })
-app.listen(8080, () => console.log("listening to local host"));
+app.listen(port, () => console.log("listening to local host"));
