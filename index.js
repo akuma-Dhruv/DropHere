@@ -55,14 +55,16 @@ app.get("/list", async (req, res) => {
 
 
   let token = req.query.token;
-
-  let r = await s3Listobjects(token);
-  listResponse = r;
-  console.log(r);
-  let x = r.Contents.map(item => item.Key);
-  console.log(typeof (x));
-  // console.log(x);
-  res.render("list", { x });
+  if(parseInt(token)>=100000)
+  { 
+    let r = await s3Listobjects(token);
+    listResponse = r;
+    // console.log(r);
+    let x = r.Contents.map(item => item.Key);
+    // console.log(typeof (x));
+    // console.log(x);
+    res.render("list", { x });
+  }
 });
 app.get("/delete", async (req, res) => {
 
@@ -78,10 +80,13 @@ app.get("/download/:ft/:fn", async (req, res) => {
 
   res.send((await r).Body);
 });
+//removee after use
 
-// app.get('/upload',function(req,res){
 
-// })
+ app.get('/upload',function(req,res){
+  let token=0;
+  res.render("upload",{token})
+ })
 app.get('/', function (req, res) {
 
   // res.sendFile(__dirname + "/index.html")
