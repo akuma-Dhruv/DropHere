@@ -1,39 +1,39 @@
 <%- include('partials/header'); -%>
 
-  <div class="hero-container container " >
+  <div class="hero-container container ">
     <div class="row justify-content-center">
-    <div class="col-8" id="sendbox">
-      <h1>Here are your files you Dropped !</h1>
-    
-      <div>
-        <div id="list">
-          <% if (x && x.length) { %>
+      <div class="col-8" id="sendbox">
+        <h1>Here are your files you Dropped !</h1>
+
+        <div>
+          <div id="list">
+            <% if (x && x.length) { %>
               <ul>
-                <% x.forEach((item) => { %>
-                  <button><a href="download/<%=item%>" >Download</a></button>
-                  
-                    
-                   <h3?><li><%= item %></li></h3> 
+                <% x.forEach((item)=> { %>
+
+                  <a href="download/<%=item%>" id="downloadList">
+                    <h3>
+                      <li>
+                        <%= item.slice(7) %>
+                      </li>
+                    </h3>
                   </a>
-                <% }) %>
+
+                  <% }) %>
               </ul>
-            <% } %>
+              <% } %>
+          </div>
+          <!-- <button>Get Started</button> -->
+        </div>
       </div>
-    <!-- <button>Get Started</button> -->
-</div>
-</div>
-</div>
+    </div>
 
     <div class="col -3">
-      <img
-        src="../public/img/downloadFile.png"
-        alt="illustration
-    "
-        class="hero-image"
-      />
+      <img src="../public/img/downloadFile.png" alt="illustration
+    " class="hero-image" />
     </div>
   </div>
-  
 
 
-<%- include('partials/footer'); -%>
+
+  <%- include('partials/footer'); -%>

@@ -3,20 +3,21 @@
   <section class="hero">
     <div class="hero-container" id="cta">
       <div class="column-left" id="sendbox">
-        <h1>Send wherever you want !</h1>
+        <h1 id="mainText">Send wherever you want !</h1>
         <div id="fileList"></div>
         <div>
           <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" id="selectFiles" multiple hidden />
+            <input type="file" name="file" id="selectFiles" multiple hidden required/>
             <button type="submit" id="uploadButton" hidden>Upload</button>
           </form>
-          <button id="chooseFiles">choose files</button>
-
+          <button id="chooseFiles">Send</button>
+<br><br><br>
           <!-- <p>Recieve</p> -->
           <form action="/list" method="get">
-            <input type="number" name="token" id="token" />
-            <button type="submit" id="listButton">List</button>
+            <input type="number" name="token" id="token" required  min="100000" max="999999" hidden/>
+            <button type="submit" id="listButton"hidden>Recieve</button>
           </form>
+          <button id="recieveButton">Recieve</button>
         </div>
       </div>
       <!-- <button>Get Started</button> -->
