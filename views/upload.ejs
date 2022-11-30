@@ -1,9 +1,13 @@
 <%- include('partials/header'); -%>
+<script type="text/javascript" src="/public/script/qrcode.js"></script>
+
   <div class="hero-container container ">
     <div class="row justify-content-center">
       <div>
         <h1>Your file(s) Upload succesfully, Token id is:<%= token %>
         </h1>
+        <div id="qrcode"></div>
+        <div id="token" hidden><%= token %></div>
       </div>
     </div>
   </div>
@@ -11,4 +15,6 @@
   <div>
     <img src="../public/img/uploadImage.png" alt="illustration" id="uploadImage" />
   </div>
+  <script type="text/javascript" src="/public/script/qrscript.js"></script>
+
   <%- include('partials/footer'); -%>
